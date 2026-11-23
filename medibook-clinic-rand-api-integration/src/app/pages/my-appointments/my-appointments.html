@@ -1,0 +1,100 @@
+
+<div class="appointments-container">
+  <div class="page-header">
+    <h1>My Appointments</h1>
+    <p>View and manage your medical appointments.</p>
+  </div>
+
+  <div class="appointments-card">
+    <h2>My Appointments</h2>
+
+    @if (isLoading) {
+      <p class="empty-message">
+        Loading appointments...
+      </p>
+    }
+
+    @if (errorMessage) {
+      <p style="color: #b42318;">
+        {{ errorMessage }}
+      </p>
+    }
+
+    @if (successMessage) {
+      <p style="color: #067647;">
+        {{ successMessage }}
+      </p>
+    }
+
+    @if (!isLoading) {
+      @for (appointment of appointments; track appointment.appointmentId) {
+        <div class="appointment-item">
+          <div class="appointment-info">
+            <h3>{{ appointment.doctorName }}</h3>
+
+            <p>
+              <strong>Specialty:</strong>
+              {{ appointment.specialty }}
+            </p>
+
+            <p>
+              <strong>Date:</strong>
+              {{ appointment.appointmentDate | date:'mediumDate' }}
+            </p>
+
+            <p>
+              <strong>Time:</strong>
+              {{ appointment.startTime }} - {{ appointment.endTime }}
+            </p>
+
+            <p>
+              <strong>Reason:</strong>
+              {{ appointment.reasonForVisit || 'Not specified' }}
+            </p>
+
+            <p>
+              <strong>Consultation Fee:</strong>
+              {{ appointment.consultationFee }}
+            </p>
+
+            <p>
+              <strong>Reference:</strong>
+              {{ appointment.referenceNumber }}
+            </p>
+
+            <span class="status">
+              {{ appointment.status }}
+            </span>
+          </div>
+
+          @if (canCancel(appointment)) {
+            <button
+              type="button"
+              class="cancel-button"
+              [disabled]="cancellingId !== null"
+              (click)="cancelAppointment(appointment)"
+            >
+              {{ cancellingId === appointment.appointmentId
+                 ? 'Cancelling...'
+                 : 'Cancel Appointment' }}
+            </button>
+          }
+        </div>
+      } @empty {
+        <p class="empty-message">
+          You don't have any appointments yet.
+        </p>
+      }
+    }
+
+    <button
+      type="button"
+      class="book-button"
+      (click)="bookAppointment()"
+    >
+      + Book New Appointment
+    </button>
+  </div>
+</div>
+
+

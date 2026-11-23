@@ -1,0 +1,92 @@
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: #eef6fd;
+  color: #183b56;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background-color: #1976d2;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.login-box {
+  background: white;
+  max-width: 350px;
+  margin: 60px auto;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px #d4e2ef;
+}
+
+h2 {
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin: 15px 0 7px;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+  border: 1px solid #cbd8e4;
+  border-radius: 6px;
+}
+
+button {
+  width: 100%;
+  padding: 13px;
+  margin-top: 22px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #9bbbd7;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #125da8;
+}
+
+.links {
+  text-align: center;
+  margin-top: 20px;
+}
+
+a {
+  color: #1976d2;
+  text-decoration: none;
+}
+
+.admin {
+  border-top: 1px solid #ddd;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.message {
+  text-align: center;
+  color: #b42318;
+  font-size: 14px;
+}
+
+@media (max-width: 420px) {
+  .login-box {
+    margin: 25px 15px;
+    padding: 20px;
+  }
+}
+

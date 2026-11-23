@@ -1,0 +1,330 @@
+﻿<div class="admin-layout">
+
+  <aside class="admin-sidebar">
+    <div class="admin-brand">
+      <div class="brand-logo">+</div>
+      <div>
+        <strong>MediBook Clinic</strong>
+        <small>Administration Portal</small>
+      </div>
+    </div>
+
+    <div class="nav-heading">MAIN MENU</div>
+
+    <nav class="admin-nav">
+      <a routerLink="/admin/dashboard">
+        <span class="nav-symbol">▦</span> Dashboard
+      </a>
+      <a routerLink="/admin/doctors" class="active">
+        <span class="nav-symbol">♙</span> Doctors
+      </a>
+      <a routerLink="/admin/specialties">
+        <span class="nav-symbol">✚</span> Specialties
+      </a>
+      <a routerLink="/admin/schedules">
+        <span class="nav-symbol">◷</span> Schedules
+      </a>
+      <a routerLink="/admin/appointments">
+        <span class="nav-symbol">▤</span> Appointments
+      </a>
+      <a routerLink="/appointment-booking">
+        <span class="nav-symbol">♡</span> Book Appointment
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="avatar">A</div>
+      <div>
+        <strong>Administrator</strong>
+        <small>System Admin</small>
+      </div>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+
+    <header class="admin-header">
+      <div>
+        <h1>Doctor Management</h1>
+        <p>Manage clinic doctors and their professional information.</p>
+      </div>
+
+      <div class="header-profile">
+        <div class="avatar">A</div>
+        <div>
+          <strong>Admin</strong>
+          <small>MediBook Clinic</small>
+        </div>
+      </div>
+    </header>
+
+    <section class="stats-grid">
+
+      <article class="stat-card">
+        <div class="stat-card-top">
+          <span>Total Doctors</span>
+          <span class="stat-icon icon-blue">♙</span>
+        </div>
+        <h2>{{ totalDoctors }}</h2>
+        <p>All registered doctors</p>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-card-top">
+          <span>Active Doctors</span>
+          <span class="stat-icon icon-green">✓</span>
+        </div>
+        <h2>{{ activeDoctors }}</h2>
+        <p>Currently available</p>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-card-top">
+          <span>Inactive Doctors</span>
+          <span class="stat-icon icon-purple">–</span>
+        </div>
+        <h2>{{ inactiveDoctors }}</h2>
+        <p>Currently unavailable</p>
+      </article>
+
+    </section>
+
+    <section class="content-card">
+
+      <div class="card-heading">
+        <div>
+          <h2>
+            {{ editingId === null ? 'Add New Doctor' : 'Edit Doctor' }}
+          </h2>
+          <p>Enter the doctor's professional information below.</p>
+        </div>
+      </div>
+
+      <form (ngSubmit)="saveDoctor()">
+
+        <div class="form-grid">
+
+          <div class="field-group">
+            <label for="fullName">Doctor Name *</label>
+            <input
+              id="fullName"
+              class="admin-input"
+              type="text"
+              name="fullName"
+              [(ngModel)]="fullName"
+              placeholder="Example: Dr. Sarah Khaled"
+              required
+            />
+          </div>
+
+          <div class="field-group">
+            <label for="specialtyId">Specialty *</label>
+            <select
+              id="specialtyId"
+              class="admin-input"
+              name="specialtyId"
+              [(ngModel)]="specialtyId"
+              required
+            >
+              <option [ngValue]="null" disabled>Select specialty</option>
+              @for (specialty of specialties; track specialty.id) {
+                <option [ngValue]="specialty.id">
+                  {{ specialty.name }}
+                </option>
+              }
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="qualifications">Qualifications</label>
+            <input
+              id="qualifications"
+              class="admin-input"
+              type="text"
+              name="qualifications"
+              [(ngModel)]="qualifications"
+              placeholder="Example: Cardiology Specialist"
+            />
+          </div>
+
+          <div class="field-group">
+            <label for="experienceYears">Experience (Years)</label>
+            <input
+              id="experienceYears"
+              class="admin-input"
+              type="number"
+              name="experienceYears"
+              [(ngModel)]="experienceYears"
+              min="0"
+              placeholder="Example: 10"
+            />
+          </div>
+
+          <div class="field-group">
+            <label for="consultationFee">Consultation Fee</label>
+            <input
+              id="consultationFee"
+              class="admin-input"
+              type="number"
+              name="consultationFee"
+              [(ngModel)]="consultationFee"
+              min="0"
+              step="0.01"
+              placeholder="Example: 30"
+            />
+          </div>
+
+          <div class="field-group">
+            <label for="photoUrl">Photo URL</label>
+            <input
+              id="photoUrl"
+              class="admin-input"
+              type="url"
+              name="photoUrl"
+              [(ngModel)]="photoUrl"
+              placeholder="Enter image URL"
+            />
+          </div>
+
+          <div class="field-group">
+            <label for="bio">Doctor Biography</label>
+            <input
+              id="bio"
+              class="admin-input"
+              type="text"
+              name="bio"
+              [(ngModel)]="bio"
+              placeholder="Short professional biography"
+            />
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+          <button class="primary-btn" type="submit" [disabled]="isLoading">
+            {{ editingId === null ? 'Add Doctor' : 'Save Changes' }}
+          </button>
+
+          @if (editingId !== null) {
+            <button
+              class="secondary-btn"
+              type="button"
+              (click)="resetForm()"
+            >
+              Cancel
+            </button>
+          }
+        </div>
+
+        @if (message) {
+          <p class="notice-message">{{ message }}</p>
+        }
+
+      </form>
+
+    </section>
+
+    <section class="content-card">
+
+      <div class="card-heading">
+        <div>
+          <h2>All Doctors</h2>
+          <p>View, edit, activate or remove clinic doctors.</p>
+        </div>
+
+        <input
+          class="admin-input search-box"
+          type="search"
+          name="searchText"
+          [(ngModel)]="searchText"
+          placeholder="Search doctors..."
+        />
+      </div>
+
+      @if (isLoading) {
+        <p class="empty-message">Loading doctors...</p>
+      } @else {
+        <div class="table-wrapper">
+          <table class="admin-table">
+
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Doctor</th>
+                <th>Specialty</th>
+                <th>Qualifications</th>
+                <th>Experience</th>
+                <th>Fee</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (doctor of filteredDoctors; track doctor.id) {
+                <tr>
+                  <td>#{{ doctor.id }}</td>
+                  <td><strong>{{ doctor.fullName }}</strong></td>
+                  <td>{{ getSpecialtyName(doctor.specialtyId) }}</td>
+                  <td>{{ doctor.qualifications || '—' }}</td>
+                  <td>
+                    {{ doctor.experienceYears ?? '—' }}
+                    @if (doctor.experienceYears !== null && doctor.experienceYears !== undefined) {
+                      years
+                    }
+                  </td>
+                  <td>
+                    {{ doctor.consultationFee !== null && doctor.consultationFee !== undefined
+                      ? doctor.consultationFee
+                      : '—' }}
+                  </td>
+
+                  <td>
+                    <button
+                      type="button"
+                      class="status-badge"
+                      [class.status-active]="doctor.isActive === 1"
+                      [class.status-inactive]="doctor.isActive !== 1"
+                      (click)="toggleStatus(doctor)"
+                    >
+                      {{ doctor.isActive === 1 ? 'Active' : 'Inactive' }}
+                    </button>
+                  </td>
+
+                  <td>
+                    <div class="action-group">
+                      <button
+                        type="button"
+                        class="secondary-btn"
+                        (click)="editDoctor(doctor)"
+                      >
+                        Edit
+                      </button>
+
+                      <button
+                        type="button"
+                        class="danger-btn"
+                        (click)="deleteDoctor(doctor.id)"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td colspan="8" class="empty-message">
+                    No doctors found.
+                  </td>
+                </tr>
+              }
+            </tbody>
+
+          </table>
+        </div>
+      }
+
+    </section>
+
+  </main>
+</div>

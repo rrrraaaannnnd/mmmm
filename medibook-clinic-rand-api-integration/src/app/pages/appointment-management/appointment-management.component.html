@@ -1,0 +1,229 @@
+
+<div class="admin-layout">
+
+  <aside class="admin-sidebar">
+
+    <div class="admin-brand">
+      <div class="brand-logo">+</div>
+      <div>
+        <strong>MediBook Clinic</strong>
+        <small>Administration Portal</small>
+      </div>
+    </div>
+
+    <div class="nav-heading">MAIN MENU</div>
+
+    <nav class="admin-nav">
+      <a routerLink="/admin/dashboard">
+        <span class="nav-symbol">▦</span> Dashboard
+      </a>
+      <a routerLink="/admin/specialties">
+        <span class="nav-symbol">✚</span> Specialties
+      </a>
+      <a routerLink="/admin/schedules">
+        <span class="nav-symbol">◷</span> Schedules
+      </a>
+      <a routerLink="/admin/appointments" class="active">
+        <span class="nav-symbol">▤</span> Appointments
+      </a>
+      <a routerLink="/appointment-booking">
+        <span class="nav-symbol">♙</span> Book Appointment
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="avatar">A</div>
+      <div>
+        <strong>Administrator</strong>
+        <small>System Admin</small>
+      </div>
+    </div>
+
+  </aside>
+
+  <main class="admin-main">
+
+    <header class="admin-header">
+      <div>
+        <h1>Appointment Management</h1>
+        <p>View and manage all patient appointments.</p>
+      </div>
+
+      <div class="header-profile">
+        <div class="avatar">A</div>
+        <div>
+          <strong>Admin</strong>
+          <small>MediBook Clinic</small>
+        </div>
+      </div>
+    </header>
+
+    <!-- Statistics -->
+    <section class="stats-grid">
+
+      <article class="stat-card">
+        <div class="stat-card-top">
+          <span>Total Appointments</span>
+          <span class="stat-icon icon-blue">▤</span>
+        </div>
+        <h2>{{ totalAppointments }}</h2>
+        <p>All bookings</p>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-card-top">
+          <span>Pending</span>
+          <span class="stat-icon icon-orange">◷</span>
+        </div>
+        <h2>{{ pendingCount }}</h2>
+        <p>Waiting for confirmation</p>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-card-top">
+          <span>Confirmed</span>
+          <span class="stat-icon icon-green">✓</span>
+        </div>
+        <h2>{{ confirmedCount }}</h2>
+        <p>Approved appointments</p>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-card-top">
+          <span>Cancelled</span>
+          <span class="stat-icon icon-purple">×</span>
+        </div>
+        <h2>{{ cancelledCount }}</h2>
+        <p>Cancelled bookings</p>
+      </article>
+
+    </section>
+
+    <!-- Appointments Table -->
+    <section class="content-card">
+
+      <div class="card-heading">
+        <div>
+          <h2>All Appointments</h2>
+          <p>Search, filter and update booking statuses.</p>
+        </div>
+      </div>
+
+      <div class="form-grid filter-grid">
+
+        <div class="field-group">
+          <label for="appointmentSearch">Search Appointments</label>
+
+          <input
+            id="appointmentSearch"
+            class="admin-input"
+            type="search"
+            name="searchText"
+            [(ngModel)]="searchText"
+            placeholder="Patient, doctor or booking ID..."
+          />
+        </div>
+
+        <div class="field-group">
+          <label for="statusFilter">Filter by Status</label>
+
+          <select
+            id="statusFilter"
+            class="admin-select"
+            name="statusFilter"
+            [(ngModel)]="statusFilter"
+          >
+            <option value="All">All Statuses</option>
+            <option value="Pending">Pending</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="table-wrapper">
+
+        <table class="admin-table">
+
+          <thead>
+            <tr>
+              <th>Booking ID</th>
+              <th>Patient</th>
+              <th>Doctor</th>
+              <th>Specialty</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Fee</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            @for (
+              appointment of filteredAppointments;
+              track appointment.id
+            ) {
+
+              <tr>
+
+                <td>#{{ appointment.id }}</td>
+
+                <td>
+                  <strong>{{ appointment.patientName }}</strong>
+                </td>
+
+                <td>{{ appointment.doctorName }}</td>
+
+                <td>{{ appointment.specialty }}</td>
+
+                <td>{{ appointment.date }}</td>
+
+                <td>{{ appointment.time }}</td>
+
+                <td>{{ appointment.fee }} JOD</td>
+
+                <td>
+                  <select
+                    class="admin-select status-select"
+                    [value]="appointment.status"
+                    [attr.aria-label]="'Status for booking ' + appointment.id"
+                    (change)="updateStatus(
+                      appointment.id,
+                      $any($event.target).value
+                    )"
+                  >
+                    <option value="Pending">Pending</option>
+                    <option value="Confirmed">Confirmed</option>
+                    <option value="Cancelled">Cancelled</option>
+                  </select>
+                </td>
+
+              </tr>
+
+            } @empty {
+
+              <tr>
+                <td colspan="8" class="empty-message">
+                  No appointments found.
+                </td>
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+      <p class="demo-note">
+        Live appointment data loaded from the MediBook API.
+      </p>
+
+    </section>
+
+  </main>
+
+</div>

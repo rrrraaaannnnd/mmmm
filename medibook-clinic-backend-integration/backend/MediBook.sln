@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37806.7 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediBook.Api", "MediBook.Api\MediBook.Api.csproj", "{DBFFFE5D-091B-4B90-9D42-5E1C5E660608}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DBFFFE5D-091B-4B90-9D42-5E1C5E660608}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBFFFE5D-091B-4B90-9D42-5E1C5E660608}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBFFFE5D-091B-4B90-9D42-5E1C5E660608}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBFFFE5D-091B-4B90-9D42-5E1C5E660608}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2FEF66F0-CFE9-4E54-ABA6-FB2BB5B48DEC}
+	EndGlobalSection
+EndGlobal

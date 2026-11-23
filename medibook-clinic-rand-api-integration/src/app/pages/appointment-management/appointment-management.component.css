@@ -1,0 +1,19 @@
+
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.filter-grid {
+  margin-bottom: 22px;
+}
+
+.status-select {
+  min-width: 115px;
+}
+
+@media (max-width: 700px) {
+  .filter-grid {
+    grid-template-columns: 1fr;
+  }
+}

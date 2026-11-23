@@ -1,0 +1,246 @@
+
+<div class="admin-layout">
+
+  <aside class="admin-sidebar">
+    <div class="admin-brand">
+      <div class="brand-logo">+</div>
+      <div>
+        <strong>MediBook Clinic</strong>
+        <small>Administration Portal</small>
+      </div>
+    </div>
+
+    <div class="nav-heading">MAIN MENU</div>
+
+    <nav class="admin-nav">
+      <a routerLink="/admin/dashboard">
+        <span class="nav-symbol">▦</span> Dashboard
+      </a>
+      <a routerLink="/admin/specialties" class="active">
+        <span class="nav-symbol">✚</span> Specialties
+      </a>
+      <a routerLink="/admin/schedules">
+        <span class="nav-symbol">◷</span> Schedules
+      </a>
+      <a routerLink="/admin/appointments">
+        <span class="nav-symbol">▤</span> Appointments
+      </a>
+      <a routerLink="/appointment-booking">
+        <span class="nav-symbol">♙</span> Book Appointment
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="avatar">A</div>
+      <div>
+        <strong>Administrator</strong>
+        <small>System Admin</small>
+      </div>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+
+    <header class="admin-header">
+      <div>
+        <h1>Specialty Management</h1>
+        <p>Manage the clinic's medical specialties.</p>
+      </div>
+
+      <div class="header-profile">
+        <div class="avatar">A</div>
+        <div>
+          <strong>Admin</strong>
+          <small>MediBook Clinic</small>
+        </div>
+      </div>
+    </header>
+
+    <!-- Statistics -->
+    <section class="stats-grid">
+
+      <article class="stat-card">
+        <div class="stat-card-top">
+          <span>Total Specialties</span>
+          <span class="stat-icon icon-blue">✚</span>
+        </div>
+        <h2>{{ totalSpecialties }}</h2>
+        <p>All medical specialties</p>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-card-top">
+          <span>Active Specialties</span>
+          <span class="stat-icon icon-green">✓</span>
+        </div>
+        <h2>{{ activeCount }}</h2>
+        <p>Currently available</p>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-card-top">
+          <span>Assigned Doctors</span>
+          <span class="stat-icon icon-purple">♙</span>
+        </div>
+        <h2>{{ totalDoctors }}</h2>
+        <p>Across all specialties</p>
+      </article>
+
+    </section>
+
+    <!-- Add / Edit Form -->
+    <section class="content-card">
+
+      <div class="card-heading">
+        <div>
+          <h2>
+            {{ editingId === null ? 'Add New Specialty' : 'Edit Specialty' }}
+          </h2>
+          <p>Enter the medical specialty information below.</p>
+        </div>
+      </div>
+
+      <form (ngSubmit)="saveSpecialty()">
+
+        <div class="form-grid">
+
+          <div class="field-group">
+            <label for="specialtyName">Specialty Name</label>
+            <input
+              id="specialtyName"
+              class="admin-input"
+              type="text"
+              name="specialtyName"
+              [(ngModel)]="specialtyName"
+              placeholder="Example: Cardiology"
+              required
+            />
+          </div>
+
+          <div class="field-group">
+            <label for="specialtyDescription">Description</label>
+            <input
+              id="specialtyDescription"
+              class="admin-input"
+              type="text"
+              name="specialtyDescription"
+              [(ngModel)]="specialtyDescription"
+              placeholder="Enter specialty description"
+            />
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+          <button class="primary-btn" type="submit">
+            {{ editingId === null ? 'Add Specialty' : 'Save Changes' }}
+          </button>
+
+          @if (editingId !== null) {
+            <button
+              class="secondary-btn"
+              type="button"
+              (click)="resetForm()"
+            >
+              Cancel
+            </button>
+          }
+        </div>
+
+        @if (message) {
+          <p class="notice-message">{{ message }}</p>
+        }
+
+      </form>
+
+    </section>
+
+    <!-- Specialties Table -->
+    <section class="content-card">
+
+      <div class="card-heading">
+        <div>
+          <h2>All Specialties</h2>
+          <p>View, edit, activate or remove specialties.</p>
+        </div>
+
+        <input
+          class="admin-input search-box"
+          type="search"
+          name="searchText"
+          [(ngModel)]="searchText"
+          placeholder="Search specialties..."
+        />
+      </div>
+
+      <div class="table-wrapper">
+        <table class="admin-table">
+
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Specialty</th>
+              <th>Description</th>
+              <th>Doctors</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (specialty of filteredSpecialties; track specialty.id) {
+              <tr>
+                <td>#{{ specialty.id }}</td>
+                <td><strong>{{ specialty.name }}</strong></td>
+                <td>{{ specialty.description }}</td>
+                <td>{{ specialty.doctorsCount }}</td>
+
+                <td>
+                  <button
+                    type="button"
+                    class="status-badge"
+                    [class.status-active]="specialty.active"
+                    [class.status-inactive]="!specialty.active"
+                    (click)="toggleStatus(specialty)"
+                  >
+                    {{ specialty.active ? 'Active' : 'Inactive' }}
+                  </button>
+                </td>
+
+                <td>
+                  <div class="action-group">
+                    <button
+                      type="button"
+                      class="secondary-btn"
+                      (click)="editSpecialty(specialty)"
+                    >
+                      Edit
+                    </button>
+
+                    <button
+                      type="button"
+                      class="danger-btn"
+                      (click)="deleteSpecialty(specialty.id)"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="6" class="empty-message">
+                  No specialties found.
+                </td>
+              </tr>
+            }
+          </tbody>
+
+        </table>
+      </div>
+
+    </section>
+
+  </main>
+</div>
+

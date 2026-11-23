@@ -1,0 +1,102 @@
+
+.confirmation-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px;
+  background: #f0f6ff;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.confirmation-card {
+  width: 100%;
+  max-width: 550px;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(30, 90, 160, 0.12);
+  box-sizing: border-box;
+}
+
+.success-icon {
+  width: 75px;
+  height: 75px;
+  margin: 0 auto 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: #e0f2fe;
+  color: #0877c9;
+  font-size: 42px;
+  font-weight: bold;
+}
+
+.confirmation-card h1 {
+  margin-bottom: 12px;
+  color: #123b68;
+  font-size: 28px;
+}
+
+.subtitle {
+  margin-bottom: 30px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.appointment-details {
+  padding: 22px;
+  background: #f8fbff;
+  border: 1px solid #dbeafe;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.appointment-details h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #1759a6;
+  font-size: 20px;
+}
+
+.appointment-details p {
+  margin: 14px 0;
+  color: #334155;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.thank-you {
+  margin: 25px 0;
+  color: #64748b;
+}
+
+.confirmation-card button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 9px;
+  background: #1769aa;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.confirmation-card button:hover {
+  background: #104d82;
+}
+
+@media (max-width: 600px) {
+  .confirmation-card {
+    padding: 25px 20px;
+  }
+
+  .confirmation-card h1 {
+    font-size: 24px;
+  }
+}

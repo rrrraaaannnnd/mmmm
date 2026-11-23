@@ -1,0 +1,957 @@
+
+/* =====================================================
+   MEDIBOOK CLINIC - GLOBAL STYLES
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+
+:root {
+  --primary: #1769d2;
+  --primary-dark: #1053ad;
+  --navy: #122b50;
+  --background: #f4f7fc;
+  --text: #172b4d;
+  --muted: #6b7b93;
+  --white: #ffffff;
+  --border: #e6ebf3;
+  --danger: #dc4c59;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', Arial, sans-serif;
+  color: var(--text);
+  background: var(--white);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* =====================================================
+   HOME PAGE
+   ===================================================== */
+
+.clinic-page {
+  min-height: 100vh;
+}
+
+.navbar {
+  max-width: 1200px;
+  margin: auto;
+  padding: 22px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--primary);
+  font-size: 22px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.brand small {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+.brand-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: var(--primary);
+  color: white;
+  font-size: 27px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  color: #50617a;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+.login-btn {
+  padding: 11px 23px;
+  border: 1px solid #d6e5fa;
+  border-radius: 10px;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.hero {
+  max-width: 1200px;
+  min-height: 450px;
+  margin: 20px auto 0;
+  padding: 55px 65px;
+  border-radius: 26px;
+  background: linear-gradient(115deg, #f0f7ff, #e4f0ff);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 35px;
+  overflow: hidden;
+}
+
+.eyebrow {
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.hero h1 {
+  max-width: 520px;
+  margin: 22px 0 18px;
+  font-size: clamp(38px, 4vw, 57px);
+  line-height: 1.12;
+  letter-spacing: -2px;
+}
+
+.hero h1 span {
+  color: var(--primary);
+}
+
+.hero-content > p,
+.section-heading > p,
+.booking-preview p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.hero-content > p {
+  max-width: 440px;
+  margin-bottom: 28px;
+}
+
+.primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 15px 22px;
+  border-radius: 11px;
+  background: var(--primary);
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.primary-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.hero-note {
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #52647e;
+  font-size: 11px;
+}
+
+.check-icon {
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #d3f5e4;
+  color: #13864e;
+}
+
+.hero-visual {
+  position: relative;
+  min-height: 300px;
+  display: grid;
+  place-items: center;
+}
+
+.medical-circle {
+  width: 255px;
+  height: 255px;
+  border: 28px solid rgba(255, 255, 255, 0.65);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, #c4ddff, #8bb9f5);
+  box-shadow: 0 22px 50px rgba(37, 99, 180, 0.13);
+}
+
+.medical-cross {
+  color: white;
+  font-size: 110px;
+  font-weight: 400;
+  text-shadow: 0 8px 20px rgba(23, 105, 210, 0.12);
+}
+
+.medical-card {
+  position: absolute;
+  right: -5px;
+  bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 17px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 12px 35px rgba(29, 63, 110, 0.13);
+}
+
+.card-check {
+  width: 37px;
+  height: 37px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: #e4f7ed;
+  color: #15945b;
+  font-size: 22px;
+}
+
+.medical-card strong {
+  font-size: 11px;
+}
+
+.medical-card p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.floating-plus {
+  position: absolute;
+  color: #6ca7f5;
+  font-weight: 800;
+}
+
+.plus-one {
+  top: 20px;
+  right: 20px;
+  font-size: 36px;
+}
+
+.plus-two {
+  bottom: 40px;
+  left: 12px;
+  font-size: 27px;
+}
+
+.services {
+  max-width: 1200px;
+  margin: 75px auto;
+  padding: 0 28px;
+}
+
+.section-heading {
+  text-align: center;
+}
+
+.section-heading h2,
+.booking-preview h2 {
+  margin: 13px 0;
+  font-size: 30px;
+  letter-spacing: -1px;
+}
+
+.section-heading > p {
+  margin-bottom: 35px;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.service-card {
+  padding: 28px;
+  border: 1px solid #e5edf7;
+  border-radius: 17px;
+  background: white;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(35, 79, 130, 0.08);
+}
+
+.service-icon {
+  width: 45px;
+  height: 45px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: var(--light-blue);
+  color: var(--primary);
+  font-size: 25px;
+}
+
+.service-card h3 {
+  margin: 22px 0 10px;
+  font-size: 16px;
+}
+
+.service-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.booking-preview {
+  max-width: 1144px;
+  margin: 0 auto 65px;
+  padding: 35px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  border-radius: 20px;
+  background: #f2f7ff;
+}
+
+.booking-preview h2 {
+  font-size: 25px;
+}
+
+.booking-preview p {
+  margin-bottom: 0;
+}
+
+.footer {
+  padding: 30px 28px;
+  border-top: 1px solid #e8eef6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.footer p,
+.footer > span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+/* =====================================================
+   ADMIN PAGES - SHARED DESIGN
+   ===================================================== */
+
+.admin-layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  background: var(--background);
+  color: #24344d;
+}
+
+.admin-sidebar {
+  background: var(--navy);
+  color: white;
+  padding: 28px 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 42px;
+  padding: 0 8px;
+}
+
+.admin-brand .brand-logo {
+  width: 43px;
+  height: 43px;
+  border-radius: 12px;
+  background: #2563eb;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.admin-brand strong {
+  display: block;
+  font-size: 17px;
+}
+
+.admin-brand small {
+  display: block;
+  color: #a9bddc;
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.nav-heading {
+  color: #8fa7ca;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 0 12px;
+  margin-bottom: 13px;
+}
+
+.admin-nav {
+  display: grid;
+  gap: 7px;
+}
+
+.admin-nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 12px;
+  border-radius: 9px;
+  color: #d7e2f2;
+  text-decoration: none;
+  font-size: 13px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.admin-nav a:hover,
+.admin-nav a.active {
+  background: #284875;
+  color: white;
+}
+
+.nav-symbol {
+  width: 23px;
+  text-align: center;
+  font-size: 17px;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  border-top: 1px solid #345071;
+  padding: 20px 5px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-layout .avatar {
+  width: 39px;
+  height: 39px;
+  flex-shrink: 0;
+  background: #dbeafe;
+  color: #1d4e9c;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+
+.sidebar-bottom strong,
+.header-profile strong {
+  display: block;
+  font-size: 12px;
+}
+
+.sidebar-bottom small,
+.header-profile small {
+  display: block;
+  color: #a9bddc;
+  font-size: 10px;
+  margin-top: 4px;
+}
+
+.admin-main {
+  min-width: 0;
+  padding: 30px 34px;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.admin-header h1 {
+  margin: 0 0 8px;
+  font-size: 25px;
+  font-weight: 800;
+  color: #24344d;
+}
+
+.admin-header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.header-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-profile small {
+  color: var(--muted);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 17px;
+  margin-bottom: 25px;
+}
+
+.stat-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 20px;
+  box-shadow: 0 3px 12px rgba(30, 60, 100, 0.035);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.08);
+}
+
+.stat-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.stat-card-top > span:first-child {
+  font-size: 12px;
+  color: #69788e;
+}
+
+.stat-icon {
+  width: 39px;
+  height: 39px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.icon-blue {
+  background: #e7f0ff;
+  color: #2563eb;
+}
+
+.icon-green {
+  background: #e4f7ed;
+  color: #16875d;
+}
+
+.icon-purple {
+  background: #f0eaff;
+  color: #8056d9;
+}
+
+.icon-orange {
+  background: #fff2df;
+  color: #c98723;
+}
+
+.stat-card h2 {
+  font-size: 29px;
+  margin: 17px 0 6px;
+  color: #24344d;
+}
+
+.stat-card p {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.content-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 24px;
+  margin-bottom: 22px;
+  box-shadow: 0 3px 12px rgba(30, 60, 100, 0.035);
+}
+
+.card-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.card-heading h2 {
+  margin: 0 0 7px;
+  font-size: 17px;
+  color: #24344d;
+}
+
+.card-heading p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.admin-layout .form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 17px;
+}
+
+.field-group {
+  display: grid;
+  gap: 8px;
+}
+
+.field-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #52627a;
+}
+
+.admin-layout .admin-input,
+.admin-layout .admin-select,
+.admin-layout .admin-textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 12px 13px;
+  border: 1px solid #dce4ef;
+  border-radius: 8px;
+  background: white;
+  color: #24344d;
+  font-size: 12px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.admin-layout .admin-input:focus,
+.admin-layout .admin-select:focus,
+.admin-layout .admin-textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+}
+
+.admin-layout .admin-input::placeholder {
+  color: #a1adbd;
+}
+
+.admin-layout .form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.admin-layout .primary-btn,
+.admin-layout .secondary-btn,
+.admin-layout .danger-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 16px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.admin-layout .primary-btn {
+  background: var(--primary);
+  color: white;
+  transform: none;
+}
+
+.admin-layout .primary-btn:hover {
+  background: var(--primary-dark);
+  transform: none;
+}
+
+.admin-layout .secondary-btn {
+  background: #eaf1ff;
+  color: var(--primary);
+}
+
+.admin-layout .secondary-btn:hover {
+  background: #dbe8ff;
+}
+
+.admin-layout .danger-btn {
+  background: #fff0f1;
+  color: var(--danger);
+}
+
+.admin-layout .danger-btn:hover {
+  background: #ffe0e3;
+}
+
+.notice-message {
+  margin: 16px 0 0;
+  color: var(--primary-dark);
+  font-size: 12px;
+}
+
+.admin-layout .search-box {
+  width: 250px;
+  max-width: 100%;
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-table {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.admin-table th {
+  background: #f7f9fc;
+  color: #718096;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 15px 12px;
+  border-bottom: 1px solid #edf0f5;
+}
+
+.admin-table td {
+  color: #5b687c;
+  font-size: 12px;
+}
+
+.admin-table td strong {
+  color: #24344d;
+}
+
+.admin-table tbody tr:hover {
+  background: #f9fbff;
+}
+
+.action-group {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.status-badge {
+  display: inline-block;
+  border: none;
+  padding: 7px 11px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.status-active,
+.status-confirmed {
+  color: #16875d;
+  background: #def7e9;
+}
+
+.status-inactive,
+.status-cancelled {
+  color: #c23e4b;
+  background: #ffe5e8;
+}
+
+.status-pending {
+  color: #a66d12;
+  background: #fff2d8;
+}
+
+.empty-message {
+  text-align: center;
+  padding: 28px !important;
+  color: var(--muted) !important;
+  font-size: 13px !important;
+}
+
+.demo-note {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+/* =====================================================
+   RESPONSIVE DESIGN
+   ===================================================== */
+
+@media (max-width: 1050px) {
+  .admin-main {
+    padding: 24px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .navbar {
+    flex-wrap: wrap;
+  }
+
+  .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .hero {
+    margin: 12px;
+    padding: 40px 28px;
+  }
+
+  .medical-circle {
+    width: 200px;
+    height: 200px;
+  }
+
+  .medical-cross {
+    font-size: 85px;
+  }
+
+  .medical-card {
+    right: -15px;
+  }
+
+  .booking-preview {
+    margin: 0 12px 40px;
+  }
+}
+
+@media (max-width: 700px) {
+  .admin-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-sidebar {
+    padding: 18px;
+  }
+
+  .admin-brand {
+    margin-bottom: 22px;
+  }
+
+  .admin-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sidebar-bottom {
+    margin-top: 20px;
+  }
+
+  .admin-main {
+    padding: 18px;
+  }
+
+  .admin-header {
+    align-items: flex-start;
+  }
+
+  .admin-header h1 {
+    font-size: 21px;
+  }
+
+  .stats-grid,
+  .admin-layout .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-layout .search-box {
+    width: 100%;
+  }
+
+  .content-card {
+    padding: 17px;
+  }
+}
+
+@media (max-width: 650px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-visual {
+    min-height: 270px;
+  }
+
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-preview,
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .section-heading h2 {
+    font-size: 25px;
+  }
+}
+
+/* End of MediBook Clinic Global Styles */

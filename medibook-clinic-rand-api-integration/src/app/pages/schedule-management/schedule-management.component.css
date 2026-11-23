@@ -1,0 +1,25 @@
+
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.action-group {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+@media (max-width: 700px) {
+  .form-actions,
+  .action-group {
+    flex-wrap: wrap;
+  }
+}

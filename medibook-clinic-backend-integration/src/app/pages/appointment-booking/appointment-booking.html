@@ -1,0 +1,79 @@
+
+<div class="booking-container">
+  <div class="page-header">
+    <h1>Book an Appointment</h1>
+    <p class="subtitle">
+      Schedule your visit and take care of your health.
+    </p>
+  </div>
+
+  <div class="booking-card">
+    <h2>Appointment Details</h2>
+    <p class="card-description">
+      Please fill in the information below to book your appointment.
+    </p>
+
+    <form (ngSubmit)="confirmBooking()">
+      <div class="form-group">
+        <label for="doctor">Choose a Doctor</label>
+        <select
+          id="doctor"
+          name="doctor"
+          [(ngModel)]="doctor"
+          required
+        >
+          <option value="">Select a doctor</option>
+          <option value="doctor1">Dr. Ahmad</option>
+          <option value="doctor2">Dr. Sara</option>
+          <option value="doctor3">Dr. Omar</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="date">Appointment Date</label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+            [(ngModel)]="date"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="time">Appointment Time</label>
+          <select
+            id="time"
+            name="time"
+            [(ngModel)]="time"
+            required
+          >
+            <option value="">Select time</option>
+            <option value="09:00">09:00 AM</option>
+            <option value="10:00">10:00 AM</option>
+            <option value="11:00">11:00 AM</option>
+            <option value="12:00">12:00 PM</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="reason">Reason for Visit</label>
+        <textarea
+          id="reason"
+          name="reason"
+          [(ngModel)]="reason"
+          rows="3"
+          placeholder="Describe your reason for visiting..."
+        ></textarea>
+      </div>
+
+      <button type="submit">Confirm Booking</button>
+
+      <p class="note">
+        Please review your appointment details before confirming.
+      </p>
+    </form>
+  </div>
+</div>

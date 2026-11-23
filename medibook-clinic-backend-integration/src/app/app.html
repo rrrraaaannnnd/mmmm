@@ -1,0 +1,108 @@
+
+<router-outlet>
+
+
+
+<div class="clinic-page">
+  <header class="navbar">
+    <a class="brand" href="/">
+      <span class="brand-icon">✚</span>
+      <span>MediBook <small>Clinic</small></span>
+    </a>
+
+<nav class="nav-links">
+  <a routerLink="/appointment-booking">Book Appointment</a>
+  <a routerLink="/my-appointments">My Appointments</a>
+</nav>
+
+<router-outlet></router-outlet>
+
+
+    <a class="login-btn" href="#login">Login</a>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <span class="eyebrow">YOUR HEALTH, OUR PRIORITY</span>
+        <h1>Healthcare made <span>simple.</span></h1>
+        <p>
+          Book your doctor appointments easily and get the care
+          you deserve, whenever you need it.
+        </p>
+
+        <a class="primary-btn" href="#booking">
+          Book an Appointment <span>→</span>
+        </a>
+
+        <div class="hero-note">
+          <span class="check-icon">✓</span>
+          Simple booking · Trusted healthcare
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="medical-circle">
+          <span class="medical-cross">✚</span>
+          <div class="medical-card">
+            <span class="card-check">✓</span>
+            <div>
+              <strong>Appointments made easy</strong>
+              <p>Your health comes first.</p>
+            </div>
+          </div>
+        </div>
+        <div class="floating-plus plus-one">+</div>
+        <div class="floating-plus plus-two">+</div>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="section-heading">
+        <span class="eyebrow">OUR SERVICES</span>
+        <h2>Care that fits your needs</h2>
+        <p>Everything you need to manage your appointments in one place.</p>
+      </div>
+
+      <div class="service-grid">
+        <article class="service-card">
+          <span class="service-icon">▦</span>
+          <h3>Easy Booking</h3>
+          <p>Choose a doctor, date, and available time with ease.</p>
+        </article>
+
+        <article class="service-card">
+          <span class="service-icon">♡</span>
+          <h3>Trusted Doctors</h3>
+          <p>Find medical professionals across different specialties.</p>
+        </article>
+
+        <article class="service-card">
+          <span class="service-icon">✓</span>
+          <h3>Manage Appointments</h3>
+          <p>View your upcoming appointments and their status.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="booking-preview" id="booking">
+      <div>
+        <span class="eyebrow">GET STARTED</span>
+        <h2>Ready to book your visit?</h2>
+        <p>Your next appointment is just a few steps away.</p>
+      </div>
+      <a class="primary-btn" href="#appointments">Manage My Appointments →</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="brand footer-brand" href="/">
+      <span class="brand-icon">✚</span>
+      <span>MediBook <small>Clinic</small></span>
+    </a>
+    <p>Making healthcare easier, one appointment at a time.</p>
+    <span>© 2026 MediBook Clinic</span>
+  </footer>
+</div>
+
+<router-outlet >

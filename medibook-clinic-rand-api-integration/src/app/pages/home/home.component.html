@@ -1,0 +1,73 @@
+
+  <section class="hero">
+    <h1>Find Your Doctor</h1>
+    <p>Book your medical appointment easily.</p>
+
+    
+<div class="search-box">
+  <label for="doctorSearch">Search Doctors</label>
+
+  <input
+    id="doctorSearch"
+    type="search"
+    name="doctorSearch"
+    [(ngModel)]="searchTerm"
+    placeholder="Search doctors or specialties">
+</div>
+
+
+<div class="hero-actions">
+  <a routerLink="/doctors" class="action-btn">
+    View Doctors
+  </a>
+
+  <a routerLink="/appointment-booking" class="action-btn">
+    Book Appointment
+  </a>
+</div>
+  </section>
+
+  <section class="specialties">
+    <h2>Our Specialties</h2>
+
+    <div class="cards">
+      <div class="card">Cardiology</div>
+      <div class="card">Dermatology</div>
+      <div class="card">Pediatrics</div>
+    </div>
+  </section>
+
+
+<section class="doctors">
+  <h2>Our Featured Doctors</h2>
+  <p>Meet our experienced medical specialists</p>
+
+  <div class="doctor-cards">
+
+    @for (doctor of filteredDoctors; track doctor.id) {
+      <div class="doctor-card">
+
+        <div class="avatar">🩺</div>
+
+        <h3>{{ doctor.name }}</h3>
+
+        <p>{{ doctor.specialty }}</p>
+
+        <a routerLink="/appointment-booking">
+          Book Appointment
+        </a>
+
+      </div>
+    } @empty {
+      <p class="no-results">
+        No doctors found. Try another search.
+      </p>
+    }
+
+  </div>
+</section>
+
+
+  
+
+

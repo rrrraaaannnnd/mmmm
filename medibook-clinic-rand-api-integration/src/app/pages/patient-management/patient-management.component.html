@@ -1,0 +1,272 @@
+﻿
+<div class="admin-layout">
+
+  <aside class="admin-sidebar">
+
+    <div class="admin-brand">
+      <div class="brand-logo">+</div>
+      <div>
+        <strong>MediBook Clinic</strong>
+        <small>Administration Portal</small>
+      </div>
+    </div>
+
+    <div class="nav-heading">MAIN MENU</div>
+
+    <nav class="admin-nav">
+
+      <a routerLink="/admin/dashboard">
+        <span class="nav-symbol">⌂</span>
+        Dashboard
+      </a>
+
+      <a routerLink="/admin/doctors">
+        <span class="nav-symbol">D</span>
+        Doctors
+      </a>
+
+      <a routerLink="/admin/patients" class="active">
+        <span class="nav-symbol">P</span>
+        Patients
+      </a>
+
+      <a routerLink="/admin/specialties">
+        <span class="nav-symbol">+</span>
+        Specialties
+      </a>
+
+      <a routerLink="/admin/schedules">
+        <span class="nav-symbol">◷</span>
+        Schedules
+      </a>
+
+      <a routerLink="/admin/appointments">
+        <span class="nav-symbol">▤</span>
+        Appointments
+      </a>
+
+      <a routerLink="/appointment-booking">
+        <span class="nav-symbol">♡</span>
+        Book Appointment
+      </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="avatar">A</div>
+      <div>
+        <strong>Administrator</strong>
+        <small>System Admin</small>
+      </div>
+    </div>
+
+  </aside>
+
+
+  <main class="admin-main">
+
+    <header class="admin-header">
+      <div>
+        <h1>Patient Management</h1>
+        <p>Manage registered patients and their information.</p>
+      </div>
+
+      <div class="header-profile">
+        <div class="avatar">A</div>
+        <div>
+          <strong>Admin</strong>
+          <small>MediBook Clinic</small>
+        </div>
+      </div>
+    </header>
+
+    <section class="stats-grid">
+
+      <div class="stat-card">
+        <div class="stat-card-top">
+          <span>Total Patients</span>
+          <div class="stat-icon icon-blue">♡</div>
+        </div>
+        <h2>{{ totalPatients }}</h2>
+        <p>All registered patients</p>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-card-top">
+          <span>Patient Records</span>
+          <div class="stat-icon icon-green">▤</div>
+        </div>
+        <h2>{{ patients.length }}</h2>
+        <p>Available patient records</p>
+      </div>
+
+    </section>
+
+    @if (message) {
+      <div class="notice-message">
+        {{ message }}
+      </div>
+    }
+
+    @if (editingId !== null) {
+      <section class="content-card">
+
+        <div class="card-heading">
+          <div>
+            <h2>Edit Patient</h2>
+            <p>Update the selected patient's information.</p>
+          </div>
+        </div>
+
+        <form (ngSubmit)="savePatient()">
+
+          <div class="form-grid">
+
+            <div class="field-group">
+              <label>Patient Name *</label>
+              <input
+                class="admin-input"
+                type="text"
+                name="fullName"
+                [(ngModel)]="fullName"
+                placeholder="Enter patient name"
+                required>
+            </div>
+
+            <div class="field-group">
+              <label>Email Address *</label>
+              <input
+                class="admin-input"
+                type="email"
+                name="email"
+                [(ngModel)]="email"
+                placeholder="Enter email address"
+                required>
+            </div>
+
+            <div class="field-group">
+              <label>Phone Number *</label>
+              <input
+                class="admin-input"
+                type="tel"
+                name="phoneNumber"
+                [(ngModel)]="phoneNumber"
+                placeholder="Enter phone number"
+                required>
+            </div>
+
+          </div>
+
+          <div class="form-actions">
+            <button
+              type="submit"
+              class="primary-btn"
+              [disabled]="isLoading">
+              Update Patient
+            </button>
+
+            <button
+              type="button"
+              class="secondary-btn"
+              (click)="resetForm()">
+              Cancel
+            </button>
+          </div>
+
+        </form>
+
+      </section>
+    }
+
+    <section class="content-card">
+
+      <div class="card-heading">
+        <div>
+          <h2>All Patients</h2>
+          <p>View, search, edit or remove registered patients.</p>
+        </div>
+      </div>
+
+      <div class="field-group search-field">
+        <input
+          class="admin-input"
+          type="text"
+          name="searchText"
+          [(ngModel)]="searchText"
+          placeholder="Search by patient name, email or phone...">
+      </div>
+
+      @if (isLoading) {
+        <div class="empty-message">
+          Loading patients...
+        </div>
+      } @else {
+
+        <div class="table-wrapper">
+          <table class="admin-table">
+
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Patient Name</th>
+                <th>Email Address</th>
+                <th>Phone Number</th>
+                <th>Registration Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (patient of filteredPatients; track patient.id) {
+                <tr>
+                  <td>#{{ patient.id }}</td>
+
+                  <td>
+                    <strong>{{ patient.fullName }}</strong>
+                  </td>
+
+                  <td>{{ patient.email }}</td>
+
+                  <td>{{ patient.phoneNumber }}</td>
+
+                  <td>{{ patient.createdAt | date:'dd MMM yyyy' }}</td>
+
+                  <td>
+                    <div class="action-group">
+
+                      <button
+                        type="button"
+                        class="secondary-btn"
+                        (click)="editPatient(patient)">
+                        Edit
+                      </button>
+
+                      <button
+                        type="button"
+                        class="danger-btn"
+                        (click)="deletePatient(patient.id)">
+                        Delete
+                      </button>
+
+                    </div>
+                  </td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td colspan="6" class="empty-message">
+                    No patients found.
+                  </td>
+                </tr>
+              }
+            </tbody>
+
+          </table>
+        </div>
+
+      }
+
+    </section>
+
+  </main>
+</div>
+

@@ -1,0 +1,234 @@
+﻿
+<div class="admin-layout">
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+
+    <div class="admin-brand">
+      <div class="brand-logo">+</div>
+      <div>
+        <strong>MediBook Clinic</strong>
+        <small>Administration Portal</small>
+      </div>
+    </div>
+
+    <div class="nav-heading">MAIN MENU</div>
+
+    <nav class="admin-nav">
+
+  <a routerLink="/admin/dashboard" class="active">
+    <span class="nav-symbol">⌂</span>
+    Dashboard
+  </a>
+
+  <a routerLink="/admin/doctors">
+    <span class="nav-symbol">D</span>
+    Doctors
+  </a>
+
+  <a routerLink="/admin/patients">
+    <span class="nav-symbol">P</span>
+    Patients
+  </a>
+
+  <a routerLink="/admin/specialties">
+    <span class="nav-symbol">+</span>
+    Specialties
+  </a>
+
+  <a routerLink="/admin/schedules">
+    <span class="nav-symbol">◷</span>
+    Schedules
+  </a>
+
+  <a routerLink="/admin/appointments">
+    <span class="nav-symbol">▤</span>
+    Appointments
+  </a>
+
+  <a routerLink="/appointment-booking">
+    <span class="nav-symbol">♡</span>
+    Book Appointment
+  </a>
+
+</nav>
+
+    <div class="sidebar-bottom">
+      <div class="avatar">A</div>
+      <div>
+        <strong>Administrator</strong>
+        <small>System Admin</small>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- Main Content -->
+  <main class="admin-main">
+
+    <!-- Header -->
+    <header class="admin-header">
+
+      <div>
+        <h1>Dashboard Overview</h1>
+        <p>Welcome back! Here is your clinic's latest overview.</p>
+      </div>
+
+      <div class="header-profile">
+        <div class="avatar">A</div>
+        <div>
+          <strong>Admin</strong>
+          <small>MediBook Clinic</small>
+        </div>
+      </div>
+
+    </header>
+
+    <!-- Statistics -->
+    <section class="stats-grid">
+
+      <article class="stat-card">
+        <div class="stat-card-top">
+          <span>Total Doctors</span>
+          <span class="stat-icon icon-blue">👨‍⚕️</span>
+        </div>
+        <h2>{{ totalDoctors }}</h2>
+        <p>Registered doctors</p>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-card-top">
+          <span>Total Patients</span>
+          <span class="stat-icon icon-green">👥</span>
+        </div>
+        <h2>{{ totalPatients }}</h2>
+        <p>Registered patients</p>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-card-top">
+          <span>Total Appointments</span>
+          <span class="stat-icon icon-purple">📅</span>
+        </div>
+        <h2>{{ totalAppointments }}</h2>
+        <p>All bookings</p>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-card-top">
+          <span>Pending Appointments</span>
+          <span class="stat-icon icon-orange">⏳</span>
+        </div>
+        <h2>{{ pendingCount }}</h2>
+        <p>Waiting for confirmation</p>
+      </article>
+
+    </section>
+
+    <!-- Recent Appointments -->
+    <section class="content-card">
+
+      <div class="card-heading">
+
+        <div>
+          <h2>Recent Appointments</h2>
+          <p>View and monitor recent patient bookings.</p>
+        </div>
+
+        <input
+          class="admin-input search-box"
+          type="search"
+          name="searchText"
+          [(ngModel)]="searchText"
+          placeholder="Search patient or doctor..."
+        />
+
+      </div>
+
+      <div class="table-wrapper">
+
+        <table class="admin-table">
+
+          <thead>
+            <tr>
+              <th>Booking ID</th>
+              <th>Patient</th>
+              <th>Doctor</th>
+              <th>Specialty</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            @for (
+              appointment of filteredAppointments;
+              track appointment.id
+            ) {
+
+              <tr>
+
+                <td>#{{ appointment.id }}</td>
+
+                <td>
+                  <strong>{{ appointment.patientName }}</strong>
+                </td>
+
+                <td>{{ appointment.doctorName }}</td>
+
+                <td>{{ appointment.specialty }}</td>
+
+                <td>{{ appointment.date }}</td>
+
+                <td>{{ appointment.time }}</td>
+
+                <td>
+                  <select
+                    class="admin-select"
+                    [value]="appointment.status"
+                    [attr.aria-label]="'Status for booking ' + appointment.id"
+                    (change)="updateStatus(
+                      appointment.id,
+                      $any($event.target).value
+                    )"
+                  >
+                    <option value="Pending">Pending</option>
+                    <option value="Confirmed">Confirmed</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+                  </select>
+                </td>
+
+              </tr>
+
+            } @empty {
+
+              <tr>
+                <td colspan="7" class="empty-message">
+                  No appointments found.
+                </td>
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+      <p class="demo-note">
+        Live data loaded from the Admin API.
+      </p>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+
+

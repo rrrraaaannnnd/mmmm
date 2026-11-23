@@ -1,0 +1,140 @@
+
+.booking-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 35px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 70, 140, 0.12);
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: #1769aa;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666666;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+label {
+  color: #23415c;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+input,
+select,
+textarea {
+  padding: 12px;
+  border: 1px solid #cbd8e5;
+  border-radius: 8px;
+  font-size: 15px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #1769aa;
+  box-shadow: 0 0 0 3px rgba(23, 105, 170, 0.12);
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  background-color: #1769aa;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0d4f87;
+}
+
+@media (max-width: 650px) {
+  .booking-container {
+    margin: 20px 12px;
+    padding: 22px;
+  }
+  
+.page-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.page-header h1 {
+  font-size: 30px;
+}
+
+.booking-card {
+  padding: 25px;
+  border: 1px solid #e2ebf3;
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+
+.booking-card h2 {
+  color: #23415c;
+  font-size: 21px;
+  margin-bottom: 8px;
+}
+
+.card-description {
+  color: #718096;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.note {
+  text-align: center;
+  color: #718096;
+  font-size: 12px;
+  margin-top: 16px;
+}
+
+@media (max-width: 550px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .booking-card {
+    padding: 18px;
+  }
+
+  .page-header h1 {
+    font-size: 25px;
+  }
+}
+
+}

@@ -1,0 +1,279 @@
+
+<div class="admin-layout">
+
+  <aside class="admin-sidebar">
+    <div class="admin-brand">
+      <div class="brand-logo">+</div>
+      <div>
+        <strong>MediBook Clinic</strong>
+        <small>Administration Portal</small>
+      </div>
+    </div>
+
+    <div class="nav-heading">MAIN MENU</div>
+
+    <nav class="admin-nav">
+      <a routerLink="/admin/dashboard">
+        <span class="nav-symbol">▦</span> Dashboard
+      </a>
+      <a routerLink="/admin/specialties">
+        <span class="nav-symbol">✚</span> Specialties
+      </a>
+      <a routerLink="/admin/schedules" class="active">
+        <span class="nav-symbol">◷</span> Schedules
+      </a>
+      <a routerLink="/admin/appointments">
+        <span class="nav-symbol">▤</span> Appointments
+      </a>
+      <a routerLink="/appointment-booking">
+        <span class="nav-symbol">♙</span> Book Appointment
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="avatar">A</div>
+      <div>
+        <strong>Administrator</strong>
+        <small>System Admin</small>
+      </div>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+
+    <header class="admin-header">
+      <div>
+        <h1>Schedule Management</h1>
+        <p>Manage doctors' working days and available hours.</p>
+      </div>
+
+      <div class="header-profile">
+        <div class="avatar">A</div>
+        <div>
+          <strong>Admin</strong>
+          <small>MediBook Clinic</small>
+        </div>
+      </div>
+    </header>
+
+    <!-- Statistics -->
+    <section class="stats-grid">
+
+      <article class="stat-card">
+        <div class="stat-card-top">
+          <span>Total Schedules</span>
+          <span class="stat-icon icon-blue">◷</span>
+        </div>
+        <h2>{{ totalSchedules }}</h2>
+        <p>Registered schedules</p>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-card-top">
+          <span>Doctors With Schedules</span>
+          <span class="stat-icon icon-green">♙</span>
+        </div>
+        <h2>{{ totalDoctors }}</h2>
+        <p>Doctors with working hours</p>
+      </article>
+
+    </section>
+
+    <!-- Add / Edit Schedule -->
+    <section class="content-card">
+
+      <div class="card-heading">
+        <div>
+          <h2>
+            {{ editingId === null ? 'Add Doctor Schedule' : 'Edit Doctor Schedule' }}
+          </h2>
+          <p>Choose a doctor and define working hours.</p>
+        </div>
+      </div>
+
+      <form (ngSubmit)="saveSchedule()">
+
+        <div class="form-grid">
+
+          <div class="field-group">
+            <label for="doctor">Select Doctor</label>
+
+            <select
+              id="doctor"
+              class="admin-select"
+              name="doctor"
+              [(ngModel)]="selectedDoctorId"
+            >
+              @for (doctor of doctors; track doctor.id) {
+                <option [ngValue]="doctor.id">
+                  {{ doctor.name }} - {{ doctor.specialty }}
+                </option>
+              }
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="day">Working Day</label>
+
+            <select
+              id="day"
+              class="admin-select"
+              name="day"
+              [(ngModel)]="selectedDay"
+            >
+              @for (day of days; track day) {
+                <option [value]="day">{{ day }}</option>
+              }
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="startTime">Start Time</label>
+
+            <input
+              id="startTime"
+              class="admin-input"
+              type="time"
+              name="startTime"
+              [(ngModel)]="startTime"
+              required
+            />
+          </div>
+
+          <div class="field-group">
+            <label for="endTime">End Time</label>
+
+            <input
+              id="endTime"
+              class="admin-input"
+              type="time"
+              name="endTime"
+              [(ngModel)]="endTime"
+              required
+            />
+          </div>
+
+          <div class="field-group">
+            <label for="slotDuration">Appointment Duration</label>
+
+            <select
+              id="slotDuration"
+              class="admin-select"
+              name="slotDuration"
+              [(ngModel)]="slotDuration"
+            >
+              <option [ngValue]="15">15 Minutes</option>
+              <option [ngValue]="20">20 Minutes</option>
+              <option [ngValue]="30">30 Minutes</option>
+              <option [ngValue]="45">45 Minutes</option>
+              <option [ngValue]="60">60 Minutes</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+          <button class="primary-btn" type="submit">
+            {{ editingId === null ? 'Add Schedule' : 'Save Changes' }}
+          </button>
+
+          @if (editingId !== null) {
+            <button
+              class="secondary-btn"
+              type="button"
+              (click)="resetForm()"
+            >
+              Cancel
+            </button>
+          }
+        </div>
+
+        @if (message) {
+          <p class="notice-message">{{ message }}</p>
+        }
+
+      </form>
+
+    </section>
+
+    <!-- Schedules Table -->
+    <section class="content-card">
+
+      <div class="card-heading">
+        <div>
+          <h2>Doctors' Working Schedules</h2>
+          <p>View and manage the current working schedules.</p>
+        </div>
+
+        <input
+          class="admin-input search-box"
+          type="search"
+          name="searchText"
+          [(ngModel)]="searchText"
+          placeholder="Search doctor or day..."
+        />
+      </div>
+
+      <div class="table-wrapper">
+        <table class="admin-table">
+
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Doctor</th>
+              <th>Specialty</th>
+              <th>Working Day</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Slot Duration</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (schedule of filteredSchedules; track schedule.id) {
+              <tr>
+                <td>#{{ schedule.id }}</td>
+                <td><strong>{{ schedule.doctorName }}</strong></td>
+                <td>{{ schedule.specialty }}</td>
+                <td>{{ schedule.day }}</td>
+                <td>{{ schedule.startTime }}</td>
+                <td>{{ schedule.endTime }}</td>
+                <td>{{ schedule.slotDuration }} min</td>
+
+                <td>
+                  <div class="action-group">
+                    <button
+                      class="secondary-btn"
+                      type="button"
+                      (click)="editSchedule(schedule)"
+                    >
+                      Edit
+                    </button>
+
+                    <button
+                      class="danger-btn"
+                      type="button"
+                      (click)="deleteSchedule(schedule.id)"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="8" class="empty-message">
+                  No schedules found.
+                </td>
+              </tr>
+            }
+          </tbody>
+
+        </table>
+      </div>
+
+    </section>
+
+  </main>
+</div>
